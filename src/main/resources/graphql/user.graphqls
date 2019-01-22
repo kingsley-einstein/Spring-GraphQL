@@ -1,0 +1,18 @@
+type User {
+    id: ID!
+    name: String!
+    password: String!
+    articles: [Article]
+}
+
+type Query {
+    findAllAuthors: [User]
+    findById(id: ID!): User
+}
+
+type Mutation {
+    newAuthor(name: String!, password: String!): User!
+    updateName(name: String!): User!
+    updatePW(password: String!): Boolean
+    delete(id: ID!): Boolean
+}
