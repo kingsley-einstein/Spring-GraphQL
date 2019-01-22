@@ -1,10 +1,14 @@
 package com.graphql.tutorial.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -24,6 +28,9 @@ public class User implements java.io.Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Article> articles;
+
     protected User() {}
 
     public User(String name, String password) {
@@ -37,6 +44,10 @@ public class User implements java.io.Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
     }
 
     public void setName(String name) {

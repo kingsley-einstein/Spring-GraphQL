@@ -1,6 +1,7 @@
 package com.graphql.tutorial.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import com.graphql.tutorial.models.Article;
 import com.graphql.tutorial.models.User;
 import com.graphql.tutorial.repository.ArticleRepository;
 import com.graphql.tutorial.repository.UserRepository;
@@ -18,7 +19,7 @@ public class Mutation implements GraphQLMutationResolver {
     private ArticleRepository articleRepo;
 
     public User newAuthor(String name, String password) {
-        return userRepo.save(newAuthor(name, password));
+        return userRepo.save(new User(name, password));
     }
 
     public User updateName(Long id, String name) {
@@ -33,6 +34,34 @@ public class Mutation implements GraphQLMutationResolver {
         user.setPassword(password);
 
         userRepo.save(user);
+
+        return true;
+    }
+
+    public Boolean delete(Long id) {
+        userRepo.deleteById(id);
+
+        return true;
+    }
+
+    public Article newArticle(String title, String content, Long id) {
+        Article article = new Article(title, content, userRepo.getOne(id));
+
+        return articleRepo.save(article);
+    }
+
+    public Boolean update(Long id, String title, String content) {
+        Article article = articleRepo.getOne(id);
+        article.setTitle(title);
+        article.setContent(content);
+
+        articleRepo.save(article);
+
+        return true;
+    }
+
+    public Boolean deleteOne(Long id) {
+        articleRepo.deleteById(id);
 
         return true;
     }
