@@ -28,13 +28,33 @@ public class Article implements java.io.Serializable {
     private String content;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private User user;
+    private User author;
 
     protected Article() {}
 
-    public Article(String title, String content, User user) {
+    public Article(String title, String content, User author) {
         this.title = title;
         this.content = content;
-        this.user = user;
+        this.author = author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

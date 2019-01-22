@@ -7,7 +7,7 @@ type Article {
 
 extend type Query {
     findAllArticles: [Article]
-    findById(id: ID!): Article
+    findOne(id: ID!): Article
 }
 
 extend type Mutation {
