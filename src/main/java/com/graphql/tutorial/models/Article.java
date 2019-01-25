@@ -27,7 +27,7 @@ public class Article implements java.io.Serializable {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private User author;
 
     protected Article() {}

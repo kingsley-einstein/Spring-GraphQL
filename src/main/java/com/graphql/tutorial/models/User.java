@@ -28,7 +28,7 @@ public class User implements java.io.Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private List<Article> articles;
 
     protected User() {}
@@ -36,6 +36,10 @@ public class User implements java.io.Serializable {
     public User(String name, String password) {
         this.name = name;
         this.password = password;
+    }
+
+    public User(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -48,6 +52,10 @@ public class User implements java.io.Serializable {
 
     public List<Article> getArticles() {
         return articles;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setName(String name) {

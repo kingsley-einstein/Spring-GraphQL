@@ -23,14 +23,14 @@ public class Mutation implements GraphQLMutationResolver {
     }
 
     public User updateName(Long id, String name) {
-        User user = userRepo.getOne(id);
+        User user = userRepo.findOne(id);
         user.setName(name);
 
         return userRepo.save(user);
     }
 
     public Boolean updatePW(Long id, String password) {
-        User user = userRepo.getOne(id);
+        User user = userRepo.findOne(id);
         user.setPassword(password);
 
         userRepo.save(user);
@@ -38,20 +38,20 @@ public class Mutation implements GraphQLMutationResolver {
         return true;
     }
 
-    public Boolean delete(Long id) {
-        userRepo.deleteById(id);
+    public Boolean deleteUser(Long id) {
+        userRepo.delete(id);
 
         return true;
     }
 
     public Article newArticle(String title, String content, Long id) {
-        Article article = new Article(title, content, userRepo.getOne(id));
+        Article article = new Article(title, content, userRepo.findOne(id));
 
         return articleRepo.save(article);
     }
 
-    public Boolean update(Long id, String title, String content) {
-        Article article = articleRepo.getOne(id);
+    public Boolean updateArticle(Long id, String title, String content) {
+        Article article = articleRepo.findOne(id);
         article.setTitle(title);
         article.setContent(content);
 
@@ -60,8 +60,8 @@ public class Mutation implements GraphQLMutationResolver {
         return true;
     }
 
-    public Boolean deleteOne(Long id) {
-        articleRepo.deleteById(id);
+    public Boolean deleteArticle(Long id) {
+        articleRepo.delete(id);
 
         return true;
     }

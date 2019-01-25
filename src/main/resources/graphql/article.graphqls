@@ -6,12 +6,12 @@ type Article {
 }
 
 extend type Query {
-    findAllArticles: [Article]
-    findOne(id: ID!): Article
+    articles: [Article]!
+    articleById(id: ID!): Article
 }
 
 extend type Mutation {
     newArticle(title: String!, content: String!, author: ID!): Article!
-    deleteOne(id: ID!): Boolean
-    update(id: ID!, title: String!, content: String!): Boolean!
+    updateArticle(id: ID!, title: String!, content: String!): Boolean
+    deleteArticle(id: ID!): Boolean
 }

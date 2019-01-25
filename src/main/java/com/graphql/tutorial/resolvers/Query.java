@@ -20,19 +20,19 @@ public class Query implements GraphQLQueryResolver {
     @Autowired
     private ArticleRepository articleRepo;
 
-    public List<User> findAllAuthors() {
+    public List<User> getAuthors() {
         return userRepo.findAll();
     }
 
-    public User findById(Long id) {
-        return userRepo.getOne(id);
+    public User getById(Long id) {
+        return userRepo.findOne(id);
     }
 
-    public List<Article> findAllArticles() {
+    public List<Article> getArticles() {
         return articleRepo.findAll();
     }
 
-    public Article findOne(Long id) {
-        return articleRepo.getOne(id);
+    public Article getArticleById(Long id) {
+        return articleRepo.findOne(id);
     }
 }

@@ -5,14 +5,15 @@ type User {
     articles: [Article]
 }
 
+
 type Query {
-    findAllAuthors: [User]
-    findById(id: ID!): User
+    authors: [User]!
+    byId(id: ID!): User!
 }
 
 type Mutation {
     newAuthor(name: String!, password: String!): User!
     updateName(id: ID!, name: String!): User!
     updatePW(id: ID!, password: String!): Boolean
-    delete(id: ID!): Boolean
+    deleteUser(id: ID!): Boolean
 }
